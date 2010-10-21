@@ -476,9 +476,18 @@
     </section>
 
     <section title='Security Considerations'>
-      <t>
-        [[ TBD ]]
-      </t>
+      <section title="Validating SSL Certificates">
+        <t>When working with bearer tokens, it's imperative that the client fully validate the entire certificate chain when making requests to Protected Resources.</t>
+      </section>
+      <section title="Never make HTTP requests">
+        <t>Clients should never include bearer tokens in any non-TLS request; ever! Not from JavaScript to your own server over HTTP. Not from your server to an unencrypted proxy. Including a bearer token as a POST parameter also will not safeguard it if you're making non-TLS requests.</t>
+      </section>
+      <section title="Don't store bearer tokens in cookies">
+        <t>As cookies are generally sent in plaintext, do not store bearer tokens within them.</t>
+      </section>
+      <section title="Issue short lived bearer tokens">
+        <t>Having short lived (one hour or less) bearer tokens can reduce the impact of one of them being inadvertently leaked. The User-Agent flow should only issue short lived access tokens.</t>
+      </section>
     </section>
 
     <appendix title='Examples'>
